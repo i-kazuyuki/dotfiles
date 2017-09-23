@@ -35,6 +35,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'scrooloose/nerdtree'
   " ログファイルを色づけしてくれる
   NeoBundle 'vim-scripts/AnsiEsc.vim'
+  " メソッド定義元へのジャンプ
+  NeoBundle 'szw/vim-tags'
   " 自動補完
   NeoBundle 'Shougo/neocomplete.vim'
   " ステータスラインの表示内容強化
@@ -45,13 +47,16 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'Shougo/neocomplcache'
   NeoBundle 'Shougo/neosnippet'
   " vim と RuboCop の連携
-  " NeoBundle 'scrooloose/syntastic'
+  NeoBundle 'scrooloose/syntastic'
   " Rails向けのコマンドを提供する
   NeoBundle 'tpope/vim-rails'
   " Ruby向けにendを自動挿入してくれる
   NeoBundle 'tpope/vim-endwise'
   " コメントON/OFFを手軽に実行
   NeoBundle 'tomtom/tcomment_vim'
+  " ドキュメント参照
+  NeoBundle 'thinca/vim-ref'
+  NeoBundle 'yuku-t/vim-ref-ri'
   " Gitで管理しているファイル編集時に差分を表現する記号が左端に表示される
   NeoBundle 'airblade/vim-gitgutter'
 
@@ -266,7 +271,7 @@ endif
 " rubocopの設定
 """""""""""""""""""""""""""""""
 " syntastic
-let g:syntastic_mode_map = { 'mode': 'active' }
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 """""""""""""""""""""""""""""""
