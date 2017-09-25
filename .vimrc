@@ -59,7 +59,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'yuku-t/vim-ref-ri'
   " Gitで管理しているファイル編集時に差分を表現する記号が左端に表示される
   NeoBundle 'airblade/vim-gitgutter'
-
+  " BluePrintのシンタックスハイライトとか
+  NeoBundle 'kylef/apiblueprint.vim'
        call neobundle#end()
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
