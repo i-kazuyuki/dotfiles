@@ -61,6 +61,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'airblade/vim-gitgutter'
   " BluePrintのシンタックスハイライトとか
   NeoBundle 'kylef/apiblueprint.vim'
+  " Vimヘルプを日本語化
+  NeoBundle 'vim-jp/vimdoc-ja'
        call neobundle#end()
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
@@ -93,6 +95,7 @@ set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次�
 set backspace=indent,eol,start " バックスペースの設定
 set background=dark             " 暗い背景色に合わせた配色
 set clipboard+=unnamed  "クリップボード連携
+set helplang=ja,en  "Vimヘルプを日本語化
 
 """""""""""""""""""""""""""""""
 " マウス設定

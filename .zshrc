@@ -9,7 +9,7 @@ typeset -U path cdpath fpath manpath
 typeset -xT SUDO_PATH sudo_path
 typeset -U sudo_path
 sudo_path=({/usr/local,/usr,}/sbin(N-/))
-# pathを設定
+# rbenvのpathを設定
 export PATH="/Users/kazuyuki/.rbenv/shims:/usr/local/bin:$PATH"
 
 # vimを開くためのエイリアス
@@ -17,8 +17,21 @@ alias vf='vim +VimFiler'
 alias vu='vim +Unite'
 alias vn='vim +NERDTree'
 
+# MacVimへのPATHとエイリアス
+PATH=”/Applications/MacVim.app/Contents/MacOS:$PATH”
+alias mvim=/Applications/MacVim.app/Contents/MacOS/Vim
+alias mvn='mvim +NERDTree'
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/kazuyuki/.oh-my-zsh
+
+# ------------------------------------------------------------------------
+# anyenv  PATHの設定
+# ------------------------------------------------------------------------
+if [ -d $HOME/.anyenv ] ; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
