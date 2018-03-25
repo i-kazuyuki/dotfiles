@@ -16,14 +16,12 @@ export PATH="/Users/kazuyuki/.rbenv/shims:/usr/local/bin:$PATH"
 alias vf='vim +VimFiler'
 alias vu='vim +Unite'
 alias vn='vim +NERDTree'
+alias lsc='colorls'
 
 # MacVimへのPATHとエイリアス
 PATH=”/Applications/MacVim.app/Contents/MacOS:$PATH”
 alias mvim=/Applications/MacVim.app/Contents/MacOS/Vim
 alias mvn='mvim +NERDTree'
-
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/kazuyuki/.oh-my-zsh
 
 # ------------------------------------------------------------------------
 # anyenv  PATHの設定
@@ -31,12 +29,15 @@ export ZSH=/Users/kazuyuki/.oh-my-zsh
 if [ -d $HOME/.anyenv ] ; then
     export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init -)"
+    for D in `ls $HOME/.anyenv/envs`
+    do
+        export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+    done
 fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="risto"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -80,9 +81,6 @@ ZSH_THEME="risto"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -112,3 +110,52 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/kazuyuki/.oh-my-zsh
+plugins=(git colorize bundler)
+source $ZSH/oh-my-zsh.sh
+
+# auto-fu.zsh
+source $HOME/.zsh/auto-fu.zsh/auto-fu.zsh
+function zle-line-init(){
+    auto-fu-init
+}
+zle -N zle-line-init
+# 「-azfu-」を表示させない
+zstyle ':auto-fu:var' postdisplay $''
+
+# powerlevel9k
+POWERLEVEL9K_MODE='awesome-fontconfig'
+ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="self_made_theme" 前に作った自作theme
+source  ~/powerlevel9k/powerlevel9k.zsh-theme
+POWERLEVEL9K_MODE='Awesome Powerline'
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+DEFAULT_USER=kazuyuki
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable root_indicator ssh vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
+POWERLEVEL9K_TIME_BACKGROUND="clear"
+POWERLEVEL9K_TIME_FOREGROUND="249"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M} \uF017"
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭"
+#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰ $ "
+
+# For a full list of supported colors, run this little code in your terminal:
+# for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"
+# `git hub colors`
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='151'
+

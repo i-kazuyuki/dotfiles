@@ -63,8 +63,12 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'kylef/apiblueprint.vim'
   " Vimヘルプを日本語化
   NeoBundle 'vim-jp/vimdoc-ja'
+  " git拡張 vim-fugitive
+  NeoBundle 'tpope/vim-fugitive'
+  " スニペット
+  NeoBundle 'Shougo/neosnippet-snippets'
        call neobundle#end()
-
+ 
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
 
@@ -96,6 +100,11 @@ set backspace=indent,eol,start " バックスペースの設定
 set background=dark             " 暗い背景色に合わせた配色
 set clipboard+=unnamed  "クリップボード連携
 set helplang=ja,en  "Vimヘルプを日本語化
+set hlsearch  "検索結果のハイライト
+" インサートモードから抜けると自動的にIMEをオフにする
+set iminsert=0
+set imsearch=-1
+set diffopt+=vertical
 
 """""""""""""""""""""""""""""""
 " マウス設定
@@ -301,3 +310,38 @@ highlight Comment ctermfg=0        " コメントの色
 " カーソル位置の行のハイライト設定
 set cursorline
 hi clear CursorLine  "行のハイライト色を無色に設定
+
+" ------------------------------------
+" 検索結果のハイライトをEsc Esc でOFFにする
+" ------------------------------------
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+
+" ------------------------------------
+" Normalモード切り替え時にIMEをOFFにする
+" ------------------------------------
+if has('mac')
+  set ttimeoutlen=1
+  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  augroup MyIMEGroup
+    autocmd!
+    autocmd InsertLeave * :call system(g:imeoff)
+  augroup END
+  noremap <silent> <ESC> <ESC>:call system(g:imeoff)<CR>
+endif
+
+" キーマップ
+imap <C-j> <Down>
+imap <C-k> <Up>
+imap <C-h> <Left>
+imap <C-l> <Right>
+imap <C-u> <BS>
+imap <c-p> <esc>o
+imap <c-i> <esc>
+noremap <c-a> 0
+noremap <c-s> $
+
+" vimdiffの色の設定
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
